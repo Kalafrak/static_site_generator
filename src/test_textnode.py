@@ -2,11 +2,12 @@ import unittest
 
 from textnode import TextNode, TextType
 from textnode import text_node_to_html_node
-from textnode import split_nodes_delimiter
-from textnode import extract_markdown_images
-from textnode import extract_markdown_links
-from textnode import split_nodes_image
-from textnode import split_nodes_link
+from inline_markdown import split_nodes_delimiter
+from inline_markdown import extract_markdown_images
+from inline_markdown import extract_markdown_links
+from inline_markdown import split_nodes_image
+from inline_markdown import split_nodes_link
+from inline_markdown import text_to_textnodes
 
 
 class TestTextNode(unittest.TestCase):
