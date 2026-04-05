@@ -1,5 +1,10 @@
 from enum import Enum
 
+from htmlnode import ParentNode
+from inline_markdown import *
+from textnode import TextNode
+from textnode import text_node_to_html_node
+
 class BlockType(Enum):
     PARAGRAPH = "paragraph"
     HEADING = "heading"
@@ -41,3 +46,10 @@ def markdown_to_blocks(markdown):
         if block != "":
             blocks.append(block)
     return blocks
+
+def markdown_to_html_node(markdown):
+    blocks = markdown_to_blocks(markdown)
+    for block in blocks:
+        block_type = block_to_block_type(block)
+        if block_type == BlockType.PARAGRAPH:
+            
