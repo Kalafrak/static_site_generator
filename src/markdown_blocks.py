@@ -53,3 +53,12 @@ def markdown_to_html_node(markdown):
         block_type = block_to_block_type(block)
         if block_type == BlockType.PARAGRAPH:
             
+
+
+def text_to_children(text):
+    textnodes = text_to_textnodes(text)
+    htmlnodes = []
+    for textnode in textnodes:
+        htmlnode = text_node_to_html_node(textnode)
+        htmlnodes.append(htmlnode)
+    return htmlnodes
