@@ -49,10 +49,21 @@ def markdown_to_blocks(markdown):
 
 def markdown_to_html_node(markdown):
     blocks = markdown_to_blocks(markdown)
+    children = []
     for block in blocks:
         block_type = block_to_block_type(block)
         if block_type == BlockType.PARAGRAPH:
-            
+            text = " ".join(block.split("\n"))
+            paragraph_children = text_to_children(text)
+            node = ParentNode(tag="p", children=paragraph_children, props=None)
+            children.append(node)
+        elif block_type == BlockType.HEADING:
+            level = len(block) - len(block.lstrip("#"))
+            tag = f"h{level}"
+            text = block.lstrip("# ")
+            heading_children = text_to_children(text)
+            node = ParentNode(tag=tag, children=heading_children, props=None)
+            children.append(node)
 
 
 def text_to_children(text):
