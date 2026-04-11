@@ -64,6 +64,19 @@ def markdown_to_html_node(markdown):
             heading_children = text_to_children(text)
             node = ParentNode(tag=tag, children=heading_children, props=None)
             children.append(node)
+        elif block_type == BlockType.CODE:
+            text = block.strip("`")
+            text_node = TextNode(text, TextType.CODE)
+            html_node = text_node_to_html_node(text_node)
+            node = ParentNode(tag="pre", children=[html_node])
+            children.append(node)
+        elif block_type == BlockType.QUOTE:
+            lines = block.split("\n")
+            stripped_lines = [line.lstrip(">") for line in lines]
+            text = " ".join(stripped_lines)
+            quote_children = text_to_children(text)
+            node = ParentNode(tag="blockquote", children=quote_children, props=None)
+            children.append(node)
 
 
 def text_to_children(text):
