@@ -1,8 +1,6 @@
-from textnode import TextNode
-from textnode import TextType
+from copystatic import copy_files_recursive
 
 def main():
-    book = TextNode("Testing the code!", TextType.ITALIC, "https://www.wowhead.com")
-    print(book)
+    copy_files_recursive("static", "public")
 
 main()
