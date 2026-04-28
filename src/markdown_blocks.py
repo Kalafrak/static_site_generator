@@ -74,7 +74,8 @@ def markdown_to_html_node(markdown):
         elif block_type == BlockType.QUOTE:
             lines = block.split("\n")
             stripped_lines = [line.lstrip(">") for line in lines]
-            text = " ".join(stripped_lines)
+            stripped_lines_whitespace = [line.strip() for line in stripped_lines]
+            text = " ".join(stripped_lines_whitespace)
             quote_children = text_to_children(text)
             node = ParentNode(tag="blockquote", children=quote_children, props=None)
             children.append(node)
