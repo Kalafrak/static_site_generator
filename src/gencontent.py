@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 
 from markdown_blocks import markdown_to_html_node
 from htmlnode import ParentNode
@@ -28,4 +29,14 @@ def generate_page(from_path, template_path, dest_path):
     os.makedirs(dest_directory, exist_ok=True)
     with open(dest_path, mode='w') as f:
         f.write(template_replaced_content)
+
+def generate_pages_recursive(dir_path_content, template_path, dest_dir_path):
+    content_list = os.listdir(dir_path_content)
+    for item in content_list:
+        item_path = os.path.join(dir_path_content, item)
+        if os.path.isfile(item_path):
+            generate_page(item_path, template_path, os.path.join(dest_dir_path, Path(item).with_suffix(".html")))
+        else:
+            generate_pages_recursive(item_path, template_path, os.path.join(dest_dir_path, item))
+
 
